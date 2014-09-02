@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HR Management App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css" />
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css" />
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand">HR Management App</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid clearfix">
+
+        <section class="card colleft">
+            <h3>Employee List</h3>
+            <div class="toolbar master">
+                <button class="btncreate"> <span class="icon icon-plus"></span> Add new </button>
+            </div>
+            <span class="loading"></span>
+            <div class="grid" id="mastergrid"></div>
+            <div class="toolbar pager master">
+                <button class="btnprevpage" hidden><span class="icon icon-arrow-left"></span> </button>
+                <button class="btnnextpage" hidden><span class="icon icon-arrow-right"></span> Next Page </button>
+
+            </div>
+        </section>
+
+        <section class="card colright">
+            <h3>
+                Details
+                <span id="status" data-status="read"></span>
+                <span id="addressstatus" data-status="read"></span>
+            </h3>
+            <div class="detailsmsg">
+                Select an Employee
+            </div>
+            <div class="detailsform" hidden="">
+                <div class="toolbar master">
+                    <button class="btncreate"> <span class="icon icon-plus"></span> Add new </button>
+                    <button class="btnupdate"><span class="icon icon-pencil"></span> Edit </button>
+                    <button class="btndelete"><span class="icon icon-remove2"></span> Remove </button>
+
+                    
+                        <div class="error ui-widget gone">
+                            <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                                <p>
+                                    <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                                    <strong>Alert:</strong><span id="errorfield">You have to select valid employee-address values.</span>
+                                </p>
+                            </div>
+                        </div>
+                    
+                   
+                    <button class="btncancel" hidden> <span class="icon icon-cancel-circle"></span> Cancel </button>
+                    <button class="btnaccept" hidden> <span class="icon icon-checkmark-circle"></span> Accept </button>
+                </div>
+                <form name="detailsform">
+                    
+                    <ul>
+
+                        <li>
+                            <label>ID:</label> <input required type="text" id="empID" />
+                        </li>
+                        <li>
+                            <label>First name:</label> <input type="text" id="empFirstName" />
+                        </li>
+                        <li>
+                            <label>Last name:</label>  <input type="text" id="empLastName" />
+                        </li>
+                        <li>
+                            <label>Age:</label> <input type="number" min="16" max="100" id="empAge" />
+                        </li>
+                    </ul>
+
+                </form>
+
+
+                <h3>Addresses</h3>
+                <div class="addresses">
+
+                    <div class="toolbar slave">
+                        <button class="btncreate"> <span class="icon icon-plus"></span> Add new </button>
+
+
+                        <button class="btnaccept colright " hidden=""> <span class="icon icon-checkmark-circle"></span> Accept </button>
+                        <button class="btncancel colright" hidden=""> <span class="icon icon-cancel-circle"></span> Cancel </button>
+                    </div>
+
+                    <div class="grid" id="slavegrid">
+
+                    </div>
+                    <div class="toolbar pager slave">
+                        <button class="btnprevpage" hidden><span class="icon icon-arrow-left"></span> </button>
+                        <button class="btnnextpage" hidden><span class="icon icon-arrow-right"></span> Next Page </button>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+    </div>
+    <div class="footer">
+        <hr />
+        <footer>
+            <p>&copy; HR Management - Erik Lopez</p>
+        </footer>
+    </div>
+
+
+
+    <div class="rowbuttons gone">
+        <button class="btnupdate"><span class="icon icon-pencil"></span></button>
+        <button class="btndelete"><span class="icon icon-remove2"></span></button>
+    </div>
+
+
+    <div id="dialog-confirm" title="">
+        <p class="message">
+
+        </p>
+    </div>
+
+    <div class="addressform" hidden title="">
+
+        <form name="addressform">
+
+
+            <ul>
+
+                <li>
+                    <label>ID:</label> <input required type="text" id="addID" disabled />
+                </li>
+                <li>
+                    <label>Street:</label> <input type="text" id="addStreet" />
+                </li>
+                <li>
+                    <label>Zip:</label> <input type="number" id="addZip" />
+                </li>
+                <li>
+                    <label>City:</label>  <input type="text" id="addCity" />
+                </li>
+                <li>
+                    <label>State:</label>  <input type="text" id="addState" />
+                </li>
+            </ul>
+            <div class="error ui-widget" hidden>
+                <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                    <p>
+                        <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                        <strong>Alert:</strong> <span id="erraddmsg">Sample ui-state-error style.</span>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="js/plugins.js"></script>
+
+    <script src="js/jquery-ui.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>-->
+</body>
+</html>
